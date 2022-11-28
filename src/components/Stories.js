@@ -1,9 +1,37 @@
-import React from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 
-import { useGlobalContext } from '../context'
+import Article from './Article.js';
 
-const Stories = () => {
-  return <h2>stories component</h2>
+class Stories extends Component {
+  constructor(props) {
+    super(props);
+    // title, url, author, points, num_comments
+  }
+
+  render() {
+    return (
+      <section className="stories">
+        
+        {
+          this.props.articles.map(article => 
+            <Article
+              key={article.created_at_i}
+              title={article.title}
+              url={article.url}
+              author={article.author}
+              points={article.points}
+              num_comments={article.num_comments}
+            />)
+        }
+
+      </section>
+    );
+  }
 }
 
-export default Stories
+Stories.propTypes = {
+  articles: PropTypes.array
+};
+
+export default Stories;

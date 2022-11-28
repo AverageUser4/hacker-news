@@ -1,8 +1,28 @@
-import React from 'react'
-import { useGlobalContext } from '../context'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-const Buttons = () => {
-  return <h2>button container</h2>
+class Buttons extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const { currentPage, maxPage, changePage } = this.props;
+
+    return (
+      <div className="btn-container">
+        <button onClick={() => changePage(true)}>prev</button>
+        <p>{currentPage + 1} of {maxPage + 1}</p>
+        <button onClick={() => changePage(false)}>next</button>
+      </div>
+    )
+  }
 }
 
-export default Buttons
+Buttons.propTypes = {
+  currentPage: PropTypes.number,
+  maxPage: PropTypes.number,
+  changePage: PropTypes.func
+};
+
+export default Buttons;

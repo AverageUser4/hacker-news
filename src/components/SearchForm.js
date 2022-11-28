@@ -1,8 +1,28 @@
-import React from 'react'
-import { useGlobalContext } from './context'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 
-const SearchForm = () => {
-  return <h2>search form</h2>
+class SearchForm extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <form className="search-form">
+        <h2>search hacker news</h2>
+        <input
+          className="form-input"
+          value={this.props.queryString}
+          onChange={(event) => this.props.setQueryString(event.target.value)}
+        />
+      </form>
+    );
+  }
 }
 
-export default SearchForm
+SearchForm.propTypes = {
+  queryString: PropTypes.string,
+  setQueryString: PropTypes.func
+};
+
+export default SearchForm;
