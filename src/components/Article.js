@@ -7,12 +7,16 @@ class Article extends Component {
   }
 
   render() {
-    const { title, url, author, points, num_comments } = this.props;
+    const { title, url, author, points, num_comments, getRemoved } = this.props;
 
     return (
       <article className="story">
         <h4 className="title">{title}</h4>
-        <p className="info">{points} points by <span>{author} | </span> {num_comments} comments</p>
+        <p className="info">
+          {points > 0 && `${points} points`}
+          {author && <> by <span>{author}</span></>}
+          {num_comments > 0 && `| ${num_comments} comments`}
+        </p>
         <div>
           <a
             href={url}
@@ -20,7 +24,12 @@ class Article extends Component {
           >
             read more
           </a>
-          <button className="remove-btn">remove</button>
+          <button 
+            className="remove-btn"
+            onClick={getRemoved}
+          >
+            remove
+          </button>
         </div>
       </article>
     );
@@ -32,7 +41,8 @@ Article.propTypes = {
   url: PropTypes.string,
   author: PropTypes.string,
   points: PropTypes.number,
-  num_comments: PropTypes.number
+  num_comments: PropTypes.number,
+  getRemoved: PropTypes.func
 };
 // title, url, author, points, num_comments
 export default Article;

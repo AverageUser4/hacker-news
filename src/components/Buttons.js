@@ -7,13 +7,16 @@ class Buttons extends Component {
   }
 
   render() {
-    const { currentPage, maxPage, changePage } = this.props;
+    const { currentPage, maxPage, changePage, isLoading } = this.props;
+
+    if(maxPage === -1)
+      return;
 
     return (
       <div className="btn-container">
-        <button onClick={() => changePage(true)}>prev</button>
+        <button disabled={isLoading} onClick={() => isLoading || changePage(true)}>prev</button>
         <p>{currentPage + 1} of {maxPage + 1}</p>
-        <button onClick={() => changePage(false)}>next</button>
+        <button disabled={isLoading} onClick={() => isLoading || changePage(false)}>next</button>
       </div>
     )
   }
@@ -22,7 +25,8 @@ class Buttons extends Component {
 Buttons.propTypes = {
   currentPage: PropTypes.number,
   maxPage: PropTypes.number,
-  changePage: PropTypes.func
+  changePage: PropTypes.func,
+  isLoading: PropTypes.bool
 };
 
 export default Buttons;

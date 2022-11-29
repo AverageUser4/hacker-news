@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import Buttons from './components/Buttons.js';
 import SearchForm from './components/SearchForm.js';
 import Stories from './components/Stories.js';
+import Loading from './components/Loading.js';
 
 // 0-49
 const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?';
@@ -75,8 +76,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state)
-
     return (
       <>
   
@@ -89,11 +88,17 @@ class App extends Component {
           currentPage={this.state.currentPage}
           maxPage={this.state.maxPage}
           changePage={this.changePage}
+          isLoading={this.state.isLoading}
         />
   
-        <Stories
-          articles={this.state.articles}
-        />
+        {
+          this.state.isLoading ?
+            <Loading/>
+          :
+            <Stories
+              articles={this.state.articles}
+            />
+        }
   
       </>
     );

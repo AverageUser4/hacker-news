@@ -64,6 +64,9 @@ body {
   color: var(--clr-grey-1);
   line-height: 1.5;
   font-size: 0.875rem;
+
+  /* without it the scrollbar is flickering (disappears for a moment and then re-appears) when loading*/
+  overflow-y: scroll;
 }
 ul {
   list-style-type: none;
@@ -251,6 +254,8 @@ Story
 .title {
   line-height: 1.5;
   margin-bottom: 0.25rem;
+  max-height: 6em;
+  overflow: hidden;
 }
 .info {
   margin-bottom: 0.5rem;
